@@ -3,10 +3,10 @@ Verifica se todas as dependências do treinamento estão instaladas corretamente
 Execute: python verificar_instalacao.py
 """
 import sys
+import shutil
 
 OK   = "  [OK]"
 FAIL = "  [ERRO]"
-WARN = "  [AVISO]"
 
 erros = 0
 
@@ -31,7 +31,7 @@ checar(
     ),
 )
 
-# Biblioteca padrão (vem com Python — só confirma)
+# Biblioteca padrão
 for modulo in ["csv", "json", "logging", "pathlib", "dataclasses",
                "functools", "contextlib", "abc", "collections"]:
     checar(f"stdlib: {modulo}", lambda m=modulo: __import__(m) and None)
@@ -45,26 +45,32 @@ def checar_numpy():
     import numpy as np
     return f"v{np.__version__}"
 
-def checar_jupyter():
-    import jupyterlab
-    return f"v{jupyterlab.__version__}"
-
 def checar_ipykernel():
     import ipykernel
     return f"v{ipykernel.__version__}"
 
-checar("pandas",     checar_pandas)
-checar("numpy",      checar_numpy)
-checar("jupyterlab", checar_jupyter)
-checar("ipykernel",  checar_ipykernel)
+checar("pandas",    checar_pandas)
+checar("numpy",     checar_numpy)
+checar("ipykernel", checar_ipykernel)
+
+# VS Code
+def checar_vscode():
+    if shutil.which("code"):
+        return "encontrado no PATH"
+    raise RuntimeError(
+        "VS Code não encontrado no PATH — instale em https://code.visualstudio.com\n"
+        "         No Windows/macOS, marque 'Add to PATH' durante a instalação"
+    )
+
+checar("VS Code (code)", checar_vscode)
 
 # Resumo
 print()
 if erros == 0:
-    print("Tudo certo! Ambiente pronto para o treinamento.")
-    print("Execute 'jupyter lab' para iniciar.\n")
+    print("Tudo certo! Abra o projeto com: code .")
+    print("Selecione o kernel 'Python (Treinamento)' ao abrir um notebook.\n")
 else:
     print(f"{erros} problema(s) encontrado(s).")
-    print("Execute: pip install -r requirements.txt\n")
+    print("Siga o README.md para resolver.\n")
 
 sys.exit(erros)

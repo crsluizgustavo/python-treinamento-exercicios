@@ -33,8 +33,6 @@ Desenvolvido para treinees sem experiência prévia em programação.
 
 ### Passo 1 — Instalar o Git
 
-O Git é necessário para baixar (clonar) este repositório.
-
 #### Linux (Ubuntu / Debian / Mint)
 ```bash
 sudo apt update
@@ -43,19 +41,16 @@ sudo apt install -y git
 
 #### macOS
 ```bash
-# Instale o Homebrew se ainda não tiver: https://brew.sh
 brew install git
 ```
 
 #### Windows
 1. Acesse [git-scm.com/download/win](https://git-scm.com/download/win)
-2. Baixe e execute o instalador
-3. Mantenha todas as opções padrão e clique em **Next** até concluir
+2. Baixe e execute o instalador com todas as opções padrão
 
-Verifique a instalação:
+Verifique:
 ```bash
 git --version
-# Esperado: git version 2.x.x
 ```
 
 ---
@@ -84,34 +79,46 @@ brew install python
 
 #### Windows
 1. Acesse [python.org/downloads](https://www.python.org/downloads/)
-2. Baixe o instalador da versão **3.11 ou superior**
-3. Execute o instalador e marque a opção **"Add Python to PATH"** antes de instalar
-4. Clique em **Install Now**
+2. Baixe a versão **3.11 ou superior**
+3. Marque **"Add Python to PATH"** antes de instalar
 
-Verifique a instalação:
+Verifique:
 ```bash
 python --version
-# Esperado: Python 3.11.x ou superior
 ```
 
 ---
 
-### Passo 4 — Criar um Ambiente Virtual
+### Passo 4 — Instalar o VS Code
 
-Ambiente virtual isola as dependências do projeto sem afetar o sistema.
+1. Acesse [code.visualstudio.com](https://code.visualstudio.com/) e baixe o instalador
+2. Execute e siga o instalador padrão
+3. Abra o VS Code e instale as duas extensões abaixo:
+
+**Extensão Python**
+- Menu: `View → Extensions` (ou `Ctrl+Shift+X`)
+- Pesquise: `Python`
+- Instale a extensão da **Microsoft**
+
+**Extensão Jupyter**
+- Pesquise: `Jupyter`
+- Instale a extensão da **Microsoft**
+
+---
+
+### Passo 5 — Criar um Ambiente Virtual
 
 ```bash
-# Dentro da pasta clonada
+# Linux / macOS
 python3 -m venv .venv
-
-# Ative o ambiente virtual
-# Linux / macOS:
 source .venv/bin/activate
 
-# Windows (Prompt de Comando):
+# Windows (Prompt de Comando)
+python -m venv .venv
 .venv\Scripts\activate.bat
 
-# Windows (PowerShell):
+# Windows (PowerShell)
+python -m venv .venv
 .venv\Scripts\Activate.ps1
 ```
 
@@ -121,7 +128,7 @@ Quando ativado, o terminal mostrará `(.venv)` no início da linha.
 
 ---
 
-### Passo 5 — Instalar as Dependências
+### Passo 6 — Instalar as Dependências
 
 Com o ambiente virtual ativado:
 
@@ -131,7 +138,7 @@ pip install -r requirements.txt
 
 ---
 
-### Passo 6 — Registrar o Ambiente no Jupyter
+### Passo 7 — Registrar o Ambiente no VS Code
 
 ```bash
 python -m ipykernel install --user --name=treinamento --display-name "Python (Treinamento)"
@@ -139,22 +146,29 @@ python -m ipykernel install --user --name=treinamento --display-name "Python (Tr
 
 ---
 
-### Passo 7 — Abrir o Jupyter Lab
+### Passo 8 — Abrir o Projeto no VS Code
 
 ```bash
-jupyter lab
+code .
 ```
 
-O navegador abrirá automaticamente em `http://localhost:8888`.
-Navegue até a pasta `python/` e abra o notebook desejado começando pelo `nivel_1.ipynb`.
+Ou abra o VS Code manualmente em `File → Open Folder` e selecione a pasta `python-treinamento-exercicios`.
 
-> Se o navegador não abrir automaticamente, copie o link com o token que aparece no terminal.
+---
+
+### Passo 9 — Abrir o Primeiro Notebook
+
+1. No painel esquerdo, navegue até a pasta `python/`
+2. Clique em `nivel_1.ipynb`
+3. No canto superior direito do notebook, clique em **"Select Kernel"**
+4. Escolha **"Python (Treinamento)"**
+5. Execute a primeira célula com `Shift+Enter`
+
+> **Dica:** no VS Code você pode selecionar parte do código dentro de uma célula e executar só aquela seleção com `Shift+Enter` — igual ao Databricks.
 
 ---
 
 ## Verificação da Instalação
-
-Execute o script abaixo para confirmar que tudo está funcionando:
 
 ```bash
 python verificar_instalacao.py
@@ -165,47 +179,18 @@ python verificar_instalacao.py
 ## Solução de Problemas Comuns
 
 ### `python` não reconhecido no Windows
-Use `python` em vez de `python3`. Se ainda não funcionar, reinstale o Python marcando **"Add Python to PATH"**.
+Reinstale o Python marcando **"Add Python to PATH"**.
 
 ### `git` não reconhecido no Windows
 Feche e reabra o terminal após instalar o Git.
 
-### Erro de permissão no Linux ao instalar pacotes
-Não use `sudo pip install`. Sempre use o ambiente virtual conforme o Passo 4.
+### Kernel "Python (Treinamento)" não aparece no VS Code
+Repita o Passo 7 com o ambiente virtual ativado e reinicie o VS Code.
 
 ### PowerShell bloqueia o `.ps1` no Windows
-Execute no PowerShell como administrador:
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-### Porta 8888 já em uso
-```bash
-jupyter lab --port=8889
-```
-
-### Kernel não aparece no Jupyter
-Repita o Passo 6 com o ambiente virtual ativado.
-
----
-
-## VS Code (alternativa ao Jupyter Lab)
-
-1. Instale o [VS Code](https://code.visualstudio.com/)
-2. Instale a extensão **Python** (Microsoft)
-3. Instale a extensão **Jupyter** (Microsoft)
-4. Abra qualquer arquivo `.ipynb` — o VS Code abre nativamente como notebook
-5. Selecione o kernel **"Python (Treinamento)"** no canto superior direito
-
----
-
-## Desinstalar / Limpar
-
-```bash
-# Desative o ambiente virtual
-deactivate
-
-# Remova o ambiente virtual
-rm -rf .venv          # Linux / macOS
-rmdir /s /q .venv     # Windows
-```
+### Erro de permissão no Linux ao instalar pacotes
+Não use `sudo pip install`. Sempre use o ambiente virtual (Passo 5).
