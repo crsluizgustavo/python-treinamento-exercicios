@@ -31,7 +31,45 @@ Desenvolvido para treinees sem experiência prévia em programação.
 
 ## Instalação — Passo a Passo
 
-### Passo 1 — Instalar o Python
+### Passo 1 — Instalar o Git
+
+O Git é necessário para baixar (clonar) este repositório.
+
+#### Linux (Ubuntu / Debian / Mint)
+```bash
+sudo apt update
+sudo apt install -y git
+```
+
+#### macOS
+```bash
+# Instale o Homebrew se ainda não tiver: https://brew.sh
+brew install git
+```
+
+#### Windows
+1. Acesse [git-scm.com/download/win](https://git-scm.com/download/win)
+2. Baixe e execute o instalador
+3. Mantenha todas as opções padrão e clique em **Next** até concluir
+
+Verifique a instalação:
+```bash
+git --version
+# Esperado: git version 2.x.x
+```
+
+---
+
+### Passo 2 — Clonar o Repositório
+
+```bash
+git clone https://github.com/crsluizgustavo/python-treinamento-exercicios.git
+cd python-treinamento-exercicios
+```
+
+---
+
+### Passo 3 — Instalar o Python
 
 #### Linux (Ubuntu / Debian / Mint)
 ```bash
@@ -41,7 +79,6 @@ sudo apt install -y python3 python3-pip python3-venv
 
 #### macOS
 ```bash
-# Instale o Homebrew se ainda não tiver: https://brew.sh
 brew install python
 ```
 
@@ -51,7 +88,7 @@ brew install python
 3. Execute o instalador e marque a opção **"Add Python to PATH"** antes de instalar
 4. Clique em **Install Now**
 
-Verifique a instalação abrindo o terminal (Prompt de Comando ou PowerShell):
+Verifique a instalação:
 ```bash
 python --version
 # Esperado: Python 3.11.x ou superior
@@ -59,15 +96,12 @@ python --version
 
 ---
 
-### Passo 2 — Criar um Ambiente Virtual
+### Passo 4 — Criar um Ambiente Virtual
 
 Ambiente virtual isola as dependências do projeto sem afetar o sistema.
 
 ```bash
-# Entre na pasta do treinamento
-cd caminho/para/treinamento
-
-# Crie o ambiente virtual
+# Dentro da pasta clonada
 python3 -m venv .venv
 
 # Ative o ambiente virtual
@@ -87,7 +121,7 @@ Quando ativado, o terminal mostrará `(.venv)` no início da linha.
 
 ---
 
-### Passo 3 — Instalar as Dependências
+### Passo 5 — Instalar as Dependências
 
 Com o ambiente virtual ativado:
 
@@ -97,7 +131,7 @@ pip install -r requirements.txt
 
 ---
 
-### Passo 4 — Registrar o Ambiente no Jupyter
+### Passo 6 — Registrar o Ambiente no Jupyter
 
 ```bash
 python -m ipykernel install --user --name=treinamento --display-name "Python (Treinamento)"
@@ -105,7 +139,7 @@ python -m ipykernel install --user --name=treinamento --display-name "Python (Tr
 
 ---
 
-### Passo 5 — Abrir o Jupyter Lab
+### Passo 7 — Abrir o Jupyter Lab
 
 ```bash
 jupyter lab
@@ -133,8 +167,11 @@ python verificar_instalacao.py
 ### `python` não reconhecido no Windows
 Use `python` em vez de `python3`. Se ainda não funcionar, reinstale o Python marcando **"Add Python to PATH"**.
 
+### `git` não reconhecido no Windows
+Feche e reabra o terminal após instalar o Git.
+
 ### Erro de permissão no Linux ao instalar pacotes
-Não use `sudo pip install`. Sempre use o ambiente virtual conforme o Passo 2.
+Não use `sudo pip install`. Sempre use o ambiente virtual conforme o Passo 4.
 
 ### PowerShell bloqueia o `.ps1` no Windows
 Execute no PowerShell como administrador:
@@ -148,7 +185,7 @@ jupyter lab --port=8889
 ```
 
 ### Kernel não aparece no Jupyter
-Repita o Passo 4 com o ambiente virtual ativado.
+Repita o Passo 6 com o ambiente virtual ativado.
 
 ---
 
